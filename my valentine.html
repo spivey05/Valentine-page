@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Agnes ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',sans-serif;overflow-x:hidden;background:black;}
+
+/* ================= START SCREEN ================= */
+.start-screen{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:radial-gradient(circle at center,#ffccd5,#ff4d6d);
+}
+
+/* Letter-style button */
+.letter-btn{
+    position:relative;
+    padding:25px 60px;
+    font-size:22px;
+    font-weight:bold;
+    border:none;
+    border-radius:15px;
+    cursor:pointer;
+    background:#ffccd5;
+    color:#b3003b;
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+    overflow:hidden;
+    font-family:'Playfair Display', serif;
+    transition:0.3s;
+}
+.letter-btn::before{
+    content:'💌';
+    position:absolute;
+    top:100%;
+    left:100%;
+    transform:translate(-100%,-100%) scale(1);
+    font-size:40px;
+    opacity:0.3;
+    animation:pulseSeal 2s infinite;
+}
+@keyframes pulseSeal{
+    0%,100%{transform:translate(-100%,-100%) scale(1);opacity:0.3;}
+    50%{transform:translate(-100%,-100%) scale(1.2);opacity:0.7;}
+}
+.letter-btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 15px 35px rgba(0,0,0,0.5);
+}
+
+/* ================= MAIN MESSAGE ================= */
+.message-container{display:none;min-height:100vh;padding:60px 20px;text-align:center;background: radial-gradient(circle at top left,#ffb6c1,#ff69b4,#ff4d6d);color:white;position:relative;overflow:hidden;}
+
+.name-wrapper{position: relative;display: inline-block;margin-bottom: 20px;}
+.glow-name{font-family: 'Great Vibes', cursive;font-size: clamp(40px, 6vw, 70px);color:white;text-shadow:0 0 10px #fff,0 0 25px #ff99ac,0 0 40px #ff4d6d;animation: softGlow 3s ease-in-out infinite alternate;}
+@keyframes softGlow {from { text-shadow:0 0 8px #fff,0 0 20px #ff99ac; } to { text-shadow:0 0 15px #fff,0 0 40px #ff4d6d; }}
+.orbit{position: absolute;width: 220px;height: 220px;border: 3px solid gold;border-radius: 50%;top: 50%;left: 50%;transform: translate(-50%, -50%);animation: rotate 8s linear infinite;box-shadow: 0 0 20px gold;}
+.orbit2{width: 270px;height: 270px;animation-duration: 12s;opacity: 0.7;}
+@keyframes rotate{from{transform:translate(-50%,-50%) rotate(0deg);}to{transform:translate(-50%,-50%) rotate(360deg);}}
+.sparkle{position:absolute;width:6px;height:6px;background:gold;border-radius:50%;box-shadow:0 0 8px gold,0 0 12px #fff;}
+
+/* floating emojis */
+.heart{position:absolute;font-size:22px;animation:float 8s linear infinite;opacity:0.7;}
+@keyframes float{0%{transform:translateY(100vh);opacity:0;}20%{opacity:1;}100%{transform:translateY(-10vh);opacity:0;}}
+.love-letter{max-width:800px;margin:auto;background:rgba(255,255,255,0.95);color:#444;padding:40px;border-radius:25px;line-height:1.9;box-shadow:0 20px 60px rgba(0,0,0,0.3);font-size:18px;}
+.final-btn{margin-top:40px;padding:15px 40px;font-size:18px;border:none;border-radius:50px;cursor:pointer;background:linear-gradient(45deg,gold,orange);color:white;box-shadow:0 0 25px gold;display:none;}
+
+/* HERO PAGE */
+.hero-section{display:none;position:fixed;inset:0;background:linear-gradient(135deg,#ff003c,#ff7b00,#ff006e);background-size:400% 400%;animation:bgMove 10s ease infinite;text-align:center;padding:40px 20px;color:white;overflow:hidden;}
+.hero-title{font-family:'Playfair Display', serif;font-size:clamp(30px,6vw,60px);margin-top:60px;text-shadow:0 0 20px #fff,0 0 60px #ff0000;}
+.name-display{margin-top:80px;font-family:'Great Vibes', cursive;font-size:clamp(40px,8vw,90px);opacity:0;transform:scale(0.5);transition:1s ease;}
+.name-display.show{opacity:1;transform:scale(1);text-shadow:0 0 30px #fff,0 0 60px gold;}
+.back-btn{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);padding:12px 35px;border:none;border-radius:50px;cursor:pointer;background:white;color:#ff003c;font-weight:bold;}
+
+/* GOLD PARTICLE RAIN */
+.particle{position:absolute;width:8px;height:8px;background:gold;border-radius:50%;top:0;left:50%;animation:fall 3s linear infinite;opacity:0.8;}
+@keyframes fall{0%{transform:translateY(0) translateX(0);}100%{transform:translateY(100vh) translateX(calc(-50vw + 100vw * var(--rand))); opacity:0;}}
+
+@media(max-width:600px){.love-letter{padding:25px;}}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" src="https://cdn.pixabay.com/download/audio/2021/09/28/audio_3d3a486e11.mp3?filename=romantic-music-loop-11087.mp3" loop></audio>
+<audio id="heartbeat" src="https://cdn.pixabay.com/download/audio/2021/09/07/audio_93eaa7e0e5.mp3?filename=heartbeat-6312.mp3"></audio>
+
+<!-- START -->
+<div class="start-screen" id="startScreen">
+    <button class="letter-btn" onclick="openMessage()">Touch Me ❤️</button>
+</div>
+
+<!-- MESSAGE -->
+<div class="message-container" id="messageContainer">
+
+    <div class="name-wrapper">
+        <div class="orbit"></div>
+        <div class="orbit orbit2"></div>
+        <div class="glow-name">Your Love Joshua Kenny</div>
+    </div>
+
+    <div class="love-letter">
+        From the very first moment you walked into my life, everything changed.
+        You brought warmth into my world, peace into my chaos, and love into places I never knew needed it. 💕<br><br>
+
+        Thank you for your time, your kindness, your patience, and your beautiful heart.
+        Every smile you give me feels like a blessing, and every moment we share becomes a memory I treasure deeply. ❤️<br><br>
+
+        You are my happiness, my comfort, and my greatest gift.
+        Loving you is not just a feeling — it is the most beautiful decision my heart has ever made. 💞<br><br>
+
+        Agnes, you are the light that brightens my darkest days,
+        the calm in my storms, and the joy in my journey.
+        My heart chose you, and it will always choose you — today, tomorrow, and forever. ❤️
+    </div>
+
+    <button class="final-btn" id="finalBtn" onclick="startHero()">
+        Touch Me ❤️ – Happy Valentine’s My Love
+    </button>
+
+</div>
+
+<!-- HERO -->
+<div class="hero-section" id="heroSection">
+    <h1 class="hero-title">Happy Valentine’s My Love ❤️</h1>
+    <div class="name-display" id="nameDisplay"></div>
+    <button class="back-btn" onclick="goBack()">Back to Beginning</button>
+</div>
+
+<script>
+const startScreen=document.getElementById("startScreen");
+const messageContainer=document.getElementById("messageContainer");
+const finalBtn=document.getElementById("finalBtn");
+const hero=document.getElementById("heroSection");
+const nameDisplay=document.getElementById("nameDisplay");
+const bgMusic=document.getElementById("bgMusic");
+const heartbeat=document.getElementById("heartbeat");
+
+const glowName=document.querySelector('.glow-name');
+const nameWrapper=document.querySelector('.name-wrapper');
+
+// Sparkles on orbit
+function createSparkles(){
+    const sparkle=document.createElement('div');
+    sparkle.classList.add('sparkle');
+    const radius = 110 + Math.random()*80;
+    const angle=Math.random()*360;
+    sparkle.style.left=`50%`;
+    sparkle.style.top=`50%`;
+    sparkle.dataset.angle=angle;
+    sparkle.dataset.radius=radius;
+    nameWrapper.appendChild(sparkle);
+    animateSparkle(sparkle);
+}
+
+function animateSparkle(el){
+    let angle = el.dataset.angle;
+    let radius = el.dataset.radius;
+    let speed = 1 + Math.random()*1.5;
+    function move(){
+        angle = parseFloat(angle) + speed;
+        const rad = angle*Math.PI/180;
+        const x = radius*Math.cos(rad);
+        const y = radius*Math.sin(rad);
+        el.style.transform=`translate(${x}px, ${y}px)`;
+        requestAnimationFrame(move);
+    }
+    move();
+}
+for(let i=0;i<15;i++) createSparkles(); // 15 sparkles
+
+// Open message
+function openMessage(){
+    startScreen.style.display="none";
+    messageContainer.style.display="block";
+    bgMusic.play();
+    setTimeout(()=>{finalBtn.style.display="inline-block";},4000);
+}
+
+// Hero reveal
+function startHero(){
+    hero.style.display="block";
+    heartbeat.play();
+
+    const names=[
+        "Agnes 👑",
+        "My Queen ❤️",
+        "My Forever 💍",
+        "My Everything 💖"
+    ];
+
+    let i=0;
+
+    function createParticles(){
+        for(let j=0;j<20;j++){
+            const p=document.createElement("div");
+            p.classList.add("particle");
+            p.style.left=Math.random()*100+"%";
+            p.style.setProperty('--rand', Math.random());
+            hero.appendChild(p);
+            setTimeout(()=>{p.remove();},3000);
+        }
+    }
+
+    function fireworks(){
+        for(let k=0;k<30;k++){
+            const fire=document.createElement("div");
+            fire.classList.add("particle");
+            fire.style.width="6px";
+            fire.style.height="6px";
+            fire.style.background="red";
+            fire.style.left=Math.random()*100+"%";
+            hero.appendChild(fire);
+            setTimeout(()=>{fire.remove();},2000);
+        }
+    }
+
+    function showNext(){
+        if(i<names.length){
+            nameDisplay.classList.remove("show");
+            setTimeout(()=>{
+                nameDisplay.innerHTML=names[i];
+                nameDisplay.classList.add("show");
+                createParticles();
+                if(i===names.length-1) fireworks();
+                i++;
+                setTimeout(showNext,2000);
+            },500);
+        } else {
+            setTimeout(()=>{alert("💌 Secret Message: Agnes, you are my heart forever! 💌");},1500);
+        }
+    }
+    showNext();
+}
+
+function goBack(){
+    hero.style.display="none";
+    messageContainer.style.display="none";
+    startScreen.style.display="flex";
+}
+
+// floating hearts in message
+function createHeart(){
+    const heart=document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(5+Math.random()*5)+"s";
+    messageContainer.appendChild(heart);
+    setTimeout(()=>{heart.remove();},8000);
+}
+setInterval(createHeart,800);
+</script>
+
+</body>
+</html>
